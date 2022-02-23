@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.threadsweb.mapper.SchoolMapper">
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.threadsweb.entity.School">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="address" property="address"/>
+        <result column="deleted" property="deleted"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+                , name, address, deleted, create_user, create_time, update_user, update_time
+    </sql>
+
+    <select id="s1" resultType="map">
+        select *
+        from school limit 10;
+    </select>
+
+    <insert id="insertMy" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `test1`.`school`(`name`)
+        VALUES ("aaa");
+    </insert>
+
+    <select id="MygetById" parameterType="int" resultType="com.example.threadsweb.entity.School">
+        select * from school where id = #{i};
+    </select>
+</mapper>
